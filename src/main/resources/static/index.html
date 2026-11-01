@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de incidencias</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+<main>
+    <h1>Gestión de incidencias</h1>
+    <p>Consulta y filtra las incidencias registradas.</p>
+
+    <label for="filtroEstado">Filtrar por estado:</label>
+
+    <select id="filtroEstado">
+        <option value="">Todas</option>
+        <option value="ABIERTA">Abiertas</option>
+        <option value="EN_CURSO">En curso</option>
+        <option value="CERRADA">Cerradas</option>
+    </select>
+
+    <p id="mensajeError" role="alert" hidden></p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Prioridad</th>
+            <th>Estado</th>
+            <th>Usuario asignado</th>
+        </tr>
+        </thead>
+        <tbody id="tablaIncidencias">
+        <!-- JavaScript insertara aqui las incidencias -->
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>
