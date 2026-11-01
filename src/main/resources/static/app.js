@@ -57,3 +57,56 @@ filtroEstado.addEventListener("change", cargarIncidencias);
 
 // Cargar las incidencias al abrir la pagina
 cargarIncidencias();
+
+
+
+//FORMULARIO DE INCIDENCIAS
+const formIncidencia = document.getElementById("formIncidencia");
+const mensajeFormulario = document.getElementById("mensajeFormulario");
+
+// Escuchar cuando el usuario envia el formulario
+formIncidencia.addEventListener("submit", async function (event) {
+
+    // Evitar que la pagina se recargue
+    event.preventDefault();
+
+    // Recoger los datos introducidos
+    const usuarioId = document.getElementById("usuarioId").value;
+
+    const nuevaIncidencia = {
+        titulo: document.getElementById("titulo").value,
+        descripcion: document.getElementById("descripcion").value,
+        prioridad: document.getElementById("prioridad").value,
+        usuarioId: usuarioId === "" ? null : Number(usuarioId)
+    };
+
+    try {
+        mensajeFormulario.textContent = "";
+
+        // Enviar los datos al backend
+        const respuesta = await fetch("/api/incidencias", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(nuevaIncidencia)
+        });
+
+        // Comprobar si la peticion ha fallado
+        if (!respuesta.ok) {
+            const error = await respuesta.json();
+            throw new Error(error.error || "No se pudo crear la incidencia");
+        }
+
+        // Mostrar mensaje y limpiar formulario
+        mensajeFormulario.textContent = "Incidencia creada correctamente";
+        formIncidencia.reset();
+
+        // Actualizar la tabla
+        await cargarIncidencias();
+
+    } catch (error) {
+        mensajeFormulario.textContent = error.message;
+    }
+});
+

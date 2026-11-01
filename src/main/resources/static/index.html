@@ -41,5 +41,35 @@
     </table>
 </main>
 
+
+<section>
+    <h2>Crear nueva incidencia</h2>
+
+    <form id="formIncidencia">
+
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo"
+               maxlength="100" required>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion"
+                  maxlength="1000"></textarea>
+
+        <label for="prioridad">Prioridad:</label>
+        <select id="prioridad" required>
+            <option value="BAJA">Baja</option>
+            <option value="MEDIA">Media</option>
+            <option value="ALTA">Alta</option>
+        </select>
+
+        <label for="usuarioId">ID del usuario (opcional):</label>
+        <input type="number" id="usuarioId" min="1">
+
+        <button type="submit">Crear incidencia</button>
+    </form>
+
+    <p id="mensajeFormulario" role="status"></p>
+</section>
+
 </body>
 </html>
